@@ -12,11 +12,14 @@ const getUsers = async (req, res) => {
 const getSingleUser = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.userId });
-    res.json(user);
+    if (!user) {
+      return res.status(404).json({
+        message: `No user with that id`,
+      });
+    }
+    res.status(200).json(user);
   } catch (err) {
-    res.status(404).json({
-      message: `Not find a user with that id ${req.params.userId}`,
-    });
+    res.status(500).json(err);
   }
 };
 
