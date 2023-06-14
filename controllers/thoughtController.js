@@ -70,7 +70,7 @@ const createReaction = async (req, res) => {
     );
     res.json(newReaction);
   } catch (err) {
-    res.status(404).json({ message: "No thought found with this ID!" });
+    res.status(404).json(err);
   }
 };
 
